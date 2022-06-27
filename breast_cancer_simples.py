@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 import keras
 from keras.models import Sequential
 from keras.layers import Dense
+from sklearn.metrics import confusion_matrix, accuracy_score
 
 previsores = pd.read_csv('entradas_breast.csv')
 classe = pd.read_csv('saidas_breast.csv')
@@ -20,3 +21,10 @@ classificador.compile(optimizer = 'adam', loss = 'binary_crossentropy',
 
 classificador.fit(previsores_treinamento, classe_treinamento,
                   batch_size = 10, epochs = 100)
+
+previsoes = classificador.predict(previsores_teste)
+previsoes = (previsores > 0.5)
+precisao = accuracy_score(classe_teste, previsoes)
+matriz = confusion_matrix(classe_teste, previsoes)
+
+resultado = classificador.evaluate(previsores_teste, classe_teste)
