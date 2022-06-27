@@ -30,6 +30,12 @@ classificador.compile(optimizer = otimizador, loss = 'binary_crossentropy',
 classificador.fit(previsores_treinamento, classe_treinamento,
                   batch_size = 10, epochs = 100)
 
+pesos0 = classificador.layers[0].get_weights()
+print(pesos0)
+print(len(pesos0))
+pesos1 = classificador.layers[1].get_weights()
+pesos2 = classificador.layers[2].get_weights()
+
 previsoes = classificador.predict(previsores_teste)
 previsoes = (previsores > 0.5)
 precisao = accuracy_score(classe_teste, previsoes)
