@@ -1,8 +1,9 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Jun 27 00:29:14 2022
+import pandas as pd
+from sklearn.model_selection import train_test_split
 
-@author: gsaal
-"""
+previsores = pd.read_csv('entradas_breast.csv')
+classe = pd.read_csv('saidas_breast.csv')
+
+previsores_treinamento, previsores_teste, classe_treinamento, classe_teste = train_test_split(previsores, classe, test_size=0.25)
 
 
